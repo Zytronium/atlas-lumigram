@@ -7,6 +7,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import LogoutComponent from "@/components/LogoutComponent";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -25,6 +26,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: true,
+        headerRight: () => <LogoutComponent/>,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
@@ -64,10 +66,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="profile/index"
         options={{
           title: 'My Profile',
           tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name={focused ? profile : profileFilled} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile/[id]"
+        options={{
+          title: 'My Profile',
+          href: null,
         }}
       />
     </Tabs>
