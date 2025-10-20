@@ -1,50 +1,33 @@
-# Welcome to your Expo app 👋
+# Mobile Full Stack - Part 1
+aka **Atlas Lumigram**
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+----
 
-## Get started
+### ✅ Tasks checklist:
+- [X] ​0. Getting Started (0/0 pts)
+- [ ] ​1. Application Routing (0/20 pts)
+- [ ] ​2. Login / Register Screens (0/20 pts)
+- [ ] ​3. Home Tab (0/20 pts)
+- [ ] ​4. Add Post Tab (0/20 pts)
+- [ ] ​5. Favorites Tab (0/20 pts)
+- [ ] ​6. Optional: Profile Tab (0/0 pts)
+- [ ] ​7. Optional: Search Tab (0/0 pts)
 
-1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+- [ ] **Everything Done ✓** (0/100 pts) - 0%
 
-2. Start the app
+>### Progress Goals:
+<strong>Monday: 60% (task 3)</strong>  
+<em style="color: gray">Tuesday: 100% (task 5+)</em> 
 
-   ```bash
-    npx expo start
-   ```
+Completed: `N/A`
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Last week I was able to complete the entire project in 3-4 days and was able to have some time off for once.
+This week, a game I was looking forward to released and I've been busy juggling that and side projects.
+Now I have 3 days to get this project done. Let's see if I can do it again. In fact, I'm goning to aim to
+get it done in 2 days so i have some time off yet again.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+With all the side projects I'm juggling at once, I feel like I need to freeze
+time for a whole 6-12 months just to work on side projects.
