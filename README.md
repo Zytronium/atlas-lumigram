@@ -8,13 +8,15 @@ aka **Atlas Lumigram**
 - [X] ​1. Application Routing (20/20 pts)
 - [X] ​2. Login / Register Screens (20/20 pts)
 - [X] ​3. Home Tab (20/20 pts)
-- [ ] ​4. Add Post Tab (0/20 pts)
+- [X] ​4. Add Post Tab (20/20 pts)
 - [ ] ​5. Favorites Tab (0/20 pts)
+
+
 - [ ] ​6. Optional: Profile Tab (0/0 pts)
 - [ ] ​7. Optional: Search Tab (0/0 pts)
 
 
-- [ ] **Everything Done ✓** (60/100 pts) - 60%
+- [ ] **Everything Done ✓** (80/100 pts) - 80%
 
 >### Progress Goals:
 ><strong>Monday: 40-60% (task 2-3) ✓</strong>  
