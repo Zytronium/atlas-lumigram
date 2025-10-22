@@ -1,79 +1,106 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Image, Alert, Text } from "react-native";
+import { FlashList } from "@shopify/flash-list";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useState } from "react";
+import { homeFeed } from "@/placeholder";
+import Animated from "react-native-reanimated";
+import { runOnJS } from "react-native-reanimated";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+interface Post {
+  image: string;
+  caption: string;
+  id: string;
+  createdBy: string;
+}
+
+interface PostItemProps {
+  imageUrl: string;
+  caption: string;
+}
+
+function PostItem({ imageUrl, caption }: PostItemProps) {
+  const [showCaption, setShowCaption] = useState(false);
+
+  const showAlert = () => {
+    Alert.alert("Double Tap", "Image favorited!");
+  };
+
+  const longPress = Gesture.LongPress()
+    .minDuration(500)
+    .onStart(() => {
+      runOnJS(setShowCaption)(true);
+    })
+    .onEnd(() => {
+      runOnJS(setShowCaption)(false);
+    });
+
+  const doubleTap = Gesture.Tap()
+    .numberOfTaps(2)
+    .onEnd(() => {
+      runOnJS(showAlert)();
+    });
+
+  const composed = Gesture.Exclusive(doubleTap, longPress);
+
+  return (
+    <View style={styles.postContainer}>
+      <GestureDetector gesture={composed}>
+        <Animated.View>
+          <Image source={{ uri: imageUrl }} style={styles.postImage} />
+          {showCaption && (
+            <View style={styles.captionOverlay}>
+              <Text style={styles.captionText}>{caption}</Text>
+            </View>
+          )}
+        </Animated.View>
+      </GestureDetector>
+    </View>
+  );
+}
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#00003c", dark: "#00003c" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <FlashList
+        data={homeFeed}
+        renderItem={({ item }: { item: Post }) => (
+          <PostItem imageUrl={item.image} caption={item.caption} />
+        )}
+        // @ts-ignore
+        estimatedItemSize={400}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#fef9e6",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  postContainer: {
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    borderRadius: 25,
+    overflow: "hidden",
   },
-  reactLogo: {
-    height: 200,
-    width: 412,
-    bottom: 25,
-    left: 0,
+  postImage: {
+    width: "100%",
+    height: 400,
+    backgroundColor: "#fef9e6",
+  },
+  captionOverlay: {
     position: "absolute",
-
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    padding: 15,
+  },
+  captionText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "500",
   },
 });

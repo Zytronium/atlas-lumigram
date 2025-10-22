@@ -7,30 +7,14 @@ aka **Atlas Lumigram**
 - [X] ​0. Getting Started (0/0 pts)
 - [X] ​1. Application Routing (20/20 pts)
 - [X] ​2. Login / Register Screens (20/20 pts)
-- [ ] ​3. Home Tab (0/20 pts)
+- [X] ​3. Home Tab (20/20 pts)
 - [ ] ​4. Add Post Tab (0/20 pts)
 - [ ] ​5. Favorites Tab (0/20 pts)
 - [ ] ​6. Optional: Profile Tab (0/0 pts)
 - [ ] ​7. Optional: Search Tab (0/0 pts)
 
 
-- [ ] **Everything Done ✓** (40/100 pts) - 40%
-
-#### This Task:
-- [X] The login screen should open whenever the app is launched (2/2 pts)
-- [X] There should be two input fields: one for email and one for password (2/2 pts)
-- [X] The password field should not show the password (2/2 pts)
-- [X] Clicking "Create a new account" navigates to the register screen (1/1 pt)
-- [X] Clicking "Sign In" navigates to the home tab (1/1 pt)
-- [X] Screen matches the screenshot provided (2/2 pts)
-
-
-- [X] There should be two input fields: one for email and one for password (2/2 pts)
-- [X] The password field should not show the password (2/2 pts)
-- [X] Clicking "Login to an existing account" navigates to the login screen (2/2 pts)
-- [X] Clicking "Create Account" navigates to the home tab (2/2 pts)
-- [X] Screen matches the screenshot provided (2/2 pts)
-
+- [ ] **Everything Done ✓** (60/100 pts) - 60%
 
 >### Progress Goals:
 ><strong>Monday: 40-60% (task 2-3) ✓</strong>  
