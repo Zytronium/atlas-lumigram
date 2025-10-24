@@ -3,7 +3,7 @@ aka **Atlas Lumigram**
 
 ----
 
-### ✅ Tasks checklist:
+### ✅ Part 1 Tasks checklist:
 - [X] ​0. Getting Started (0/0 pts)
 - [X] ​1. Application Routing (20/20 pts)
 - [X] ​2. Login / Register Screens (20/20 pts)
@@ -24,12 +24,28 @@ aka **Atlas Lumigram**
 
 Completed: Wednesday, October 22, 2025
 
+
+### ✅ Part 2 Tasks checklist:
+- [X] ​0. Getting Started (0/0 pts)
+- [ ] ​1. Authentication (0/25 pts)
+- [ ] ​2. Add Post (0/25 pts)
+- [ ] ​3. Home Feed (0/25 pts)
+- [ ] ​4. Gestures (0/10 pts)
+- [ ] ​5. Favorites Feed (0/15 pts)
+
+
+- [ ] ​6. Optional: User Profile(0/0 pts)
+- [ ] ​7. Optional: User Search(0/0 pts)
+
+
+- [ ] **Everything Done ✓** (0/100 pts) - 0%
+
+>### Progress Goals:
+><strong>Friday: 5-10% (task 1)</strong>  
+<em style="color: gray">Saturday/Sunday: 25-50% (task 1-2)</em>  
+<em style="color: gray">Monday: 75% (task 3)</em>  
+<em style="color: gray">Tuesday: 100% (task 5)</em>  
+
+Completed: `N/A`
+
 ---
-
-Last week I was able to complete the entire project in 3-4 days and was able to have some time off for once.
-This week, a game that I was looking forward to released and I've been busy juggling that and side projects.
-Now I have 3 days to get this project done. Let's see if I can do it again. In fact, I'm going to aim to
-get it done in 2 days, so I have some time off yet again.
-
-With all the side projects I'm juggling at once, I feel like I need to freeze
-time for a whole 6-12 months just to work on side projects.
