@@ -1,4 +1,6 @@
 import { TextInput, StyleSheet } from "react-native";
+import { styles } from "@/constants/Styles";
+import React from "react";
 
 interface CaptionInputProps {
   caption: string;
@@ -8,7 +10,7 @@ interface CaptionInputProps {
 export function CaptionInput({ caption, setCaption }: CaptionInputProps) {
   return (
     <TextInput
-      style={styles.input}
+      style={styles.input2}
       placeholder="Add a caption"
       placeholderTextColor="#8b9299"
       value={caption}
@@ -18,17 +20,34 @@ export function CaptionInput({ caption, setCaption }: CaptionInputProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  input: {
-    width: "100%",
-    minHeight: 60,
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderColor: "#1ED2AF",
-    borderRadius: 12,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    fontSize: 16,
-    color: "#000",
-  },
-});
+export function EmailInput(props: {
+  email: string,
+  setEmail: (email: string) => void
+}) {
+  return <TextInput
+    style={styles.input}
+    placeholder="Email"
+    placeholderTextColor="#8b9299"
+    keyboardType="email-address"
+    autoCapitalize="none"
+    onChangeText={(e) => {
+      props.setEmail(e);
+    }}
+  />;
+}
+
+export function PasswordInput(props: {
+  password: string,
+  setPassword: (password: string) => void
+}) {
+  return <TextInput
+    style={styles.input}
+    placeholder="Password"
+    placeholderTextColor="#8b9299"
+    secureTextEntry={true}
+    autoCapitalize="none"
+    onChangeText={(e) => {
+      props.setPassword(e);
+    }}
+  />;
+}

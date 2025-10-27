@@ -27,7 +27,7 @@ Completed: Wednesday, October 22, 2025
 
 ### ✅ Part 2 Tasks checklist:
 - [X] ​0. Getting Started (0/0 pts)
-- [ ] ​1. Authentication (0/25 pts)
+- [ ] ​1. Authentication (5/25 pts)
 - [ ] ​2. Add Post (0/25 pts)
 - [ ] ​3. Home Feed (0/25 pts)
 - [ ] ​4. Gestures (0/10 pts)
@@ -38,12 +38,11 @@ Completed: Wednesday, October 22, 2025
 - [ ] ​7. Optional: User Search(0/0 pts)
 
 
-- [ ] **Everything Done ✓** (0/100 pts) - 0%
+- [ ] **Everything Done ✓** (5/100 pts) - 5%
 
 >### Progress Goals:
-><strong>Friday: 5-10% (task 1)</strong>  
-<em style="color: gray">Saturday/Sunday: 25-50% (task 1-2)</em>  
-<em style="color: gray">Monday: 75% (task 3)</em>  
+><strong>Saturday/Sunday: 10-25% (task 1)</strong>  
+<strong>Monday: 50% (task 2)</strong>  
 <em style="color: gray">Tuesday: 100% (task 5)</em>  
 
 Completed: `N/A`

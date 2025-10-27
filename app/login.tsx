@@ -1,112 +1,36 @@
-import { Pressable, Text, TextInput, View, StyleSheet, Image } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { Loading } from "@/components/Loading";
+import { CreateNewAccountLink, SignInButton } from "@/components/Buttons"
+import { styles } from "@/constants/Styles";
+import { Logo } from "@/components/Images";
+import { EmailInput, PasswordInput } from "@/components/Inputs";
 
 export default function Page() {
-  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  function login() {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    alert(`Logging in with ${email} and ${password}`);
+  }
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/images/logo.png')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-
+      <Logo />
       <Text style={styles.title}>Login</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#8b9299"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#8b9299"
-        secureTextEntry={true}
-        autoCapitalize="none"
-      />
-
-      <Pressable
-        style={styles.signInButton}
-        onPress={() => {
-          // @ts-ignore
-          router.replace('/(tabs)/');
-      }}
-      >
-        <Text style={styles.signInText}>Sign in</Text>
-      </Pressable>
-
-      <Link href="/register" replace asChild>
-        <Pressable style={styles.createAccountButton}>
-          <Text style={styles.createAccountText}>Create a new account</Text>
-        </Pressable>
-      </Link>
+      <EmailInput email={email} setEmail={setEmail} />
+      <PasswordInput password={password} setPassword={setPassword} />
+      <SignInButton onPress={login} />
+      <CreateNewAccountLink />
+      {loading && <Loading />}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#00003c',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  logo: {
-    width: 250,
-    height: 120,
-    marginBottom: 40,
-  },
-  title: {
-    fontSize: 22,
-    color: '#fff',
-    fontWeight: '600',
-    marginBottom: 15,
-  },
-  input: {
-    width: '100%',
-    height: 56,
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: '#1ed2af',
-    borderRadius: 8,
-    paddingHorizontal: 20,
-    fontSize: 16,
-    color: '#fef9e6',
-    marginBottom: 16,
-  },
-  signInButton: {
-    width: '100%',
-    height: 56,
-    backgroundColor: '#1ed2af',
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 16,
-  },
-  signInText: {
-    fontSize: 18,
-    color: '#fef9e6',
-    fontWeight: '500',
-  },
-  createAccountButton: {
-    width: '100%',
-    height: 56,
-    backgroundColor: '#000039',
-    borderWidth: 2,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  createAccountText: {
-    fontSize: 16,
-    color: '#fef9e6',
-    fontWeight: '400',
-  },
-});

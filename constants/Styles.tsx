@@ -1,0 +1,76 @@
+import { StyleSheet } from "react-native";
+import { Colors } from "@/constants/Colors";
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.global.blue,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  logo: {
+    width: 250,
+    height: 120,
+    marginBottom: 40,
+  },
+  title: {
+    fontSize: 22,
+    color: Colors.dark.text,
+    fontWeight: '600',
+    marginBottom: 15,
+  },
+  input: {
+    width: '100%',
+    height: 56,
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: Colors.global.teal,
+    borderRadius: 8,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    color: Colors.global.offwhite,
+    marginBottom: 16,
+  },
+  input2: {
+    width: "100%",
+    minHeight: 60,
+    backgroundColor: "#fff",
+    borderWidth: 2,
+    borderColor: Colors.global.teal,
+    borderRadius: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    fontSize: 16,
+    color: "#000",
+  },
+  signInButton: {
+    width: '100%',
+    height: 56,
+    backgroundColor: Colors.global.teal,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 16,
+  },
+  signInText: {
+    fontSize: 18,
+    color: Colors.global.offwhite,
+    fontWeight: '500',
+  },
+  createAccountButton: {
+    width: '100%',
+    height: 56,
+    backgroundColor: Colors.global.blue,
+    borderWidth: 2,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  createAccountText: {
+    fontSize: 16,
+    color: Colors.global.offwhite,
+    fontWeight: '400',
+  },
+});

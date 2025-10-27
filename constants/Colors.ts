@@ -9,6 +9,13 @@ const tintColorLight = teal;
 const tintColorDark = "#fef9e6";
 
 export const Colors = {
+  global: {
+    teal: teal,
+    blue: "#00003c",
+    red: '#d00414',
+    beige: "#f7f0dc",
+    offwhite: "#fef9e6",
+  },
   light: {
     text: "#11181C",
     background: "#fef9e6",
@@ -16,6 +23,7 @@ export const Colors = {
     icon: "#687076",
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
+    teal: teal
   },
   dark: {
     text: "#ECEDEE",
@@ -24,5 +32,6 @@ export const Colors = {
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
+    teal: teal
   },
 };
