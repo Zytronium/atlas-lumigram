@@ -7,9 +7,14 @@ export default function LogoutComponent() {
   const auth = useAuth();
 
   async function logout() {
-    await auth.logout();
-    router.replace('/login');
+    try {
+      await auth.logout();
+      router.replace('/login');
+    } catch (e: any) {
+      alert("Error logging out. Please try again.");
+    }
   }
+
   return (
     <Pressable onPress={logout}>
       <Ionicons name="log-out-outline" size={24} style={{ marginRight: 16 }} />

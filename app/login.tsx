@@ -30,11 +30,31 @@ export default function Page() {
       // @ts-ignore
       router.replace('/(tabs)/');
 
-    } catch (e) {
+    } catch (e: any) {
       console.error('Error logging in:', e);
-      alert('Error logging in. Please try again.');
+
+      // Handle specific Firebase errors
+      const errorCode = e?.code;
+      let errorMessage = 'An error occurred. Please try again.';
+
+      if (errorCode === 'auth/user-not-found') {
+        errorMessage = 'No account found with this email.';
+      } else if (errorCode === 'auth/wrong-password') {
+        errorMessage = 'Incorrect password.';
+      } else if (errorCode === 'auth/invalid-credential') {
+        errorMessage = 'Invalid email or password.';
+      } else if (errorCode === 'auth/too-many-requests') {
+        errorMessage = 'Too many failed attempts. Please try again later.';
+      } else if (errorCode === 'auth/network-request-failed') {
+        errorMessage = 'Network error. Check your connection.';
+      } else {
+        errorMessage = 'An unknown error occurred. Please try again.';
+      }
+
+      alert(errorMessage);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return (

@@ -46,11 +46,31 @@ export default function Page() {
       // @ts-ignore
       router.replace('/(tabs)/');
 
-    } catch (e) {
+    } catch (e: any) {
       console.error('Error registering user:', e);
-      alert('Error registering user. Please try again.');
+
+      // Handle specific Firebase errors
+      const errorCode = e?.code;
+      let errorMessage = 'An error occurred. Please try again.';
+
+      if (errorCode === 'auth/email-already-in-use') {
+        errorMessage = 'This email is already registered.';
+      } else if (errorCode === 'auth/invalid-email') {
+        errorMessage = 'Invalid email address.';
+      } else if (errorCode === 'auth/weak-password') {
+        errorMessage = 'Password is too weak.';
+      } else if (errorCode === 'auth/operation-not-allowed') {
+        errorMessage = 'Registration is currently disabled.';
+      } else if (errorCode === 'auth/network-request-failed') {
+        errorMessage = 'Network error. Check your connection.';
+      } else {
+        errorMessage = 'An unknown error occurred. Please try again.';
+      }
+
+      alert(errorMessage);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return (
