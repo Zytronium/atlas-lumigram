@@ -19,17 +19,19 @@ export default function Page() {
     setLoading(true);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     try {
-
       if (!emailPattern.test(email)) {
         alert('Please enter a valid email address.');
+        setLoading(false);
         return;
       }
       if (password.length < 6) { // normally would do 8 or even 10, but this for testing
         alert('Password must be at least 6 characters long.');
+        setLoading(false);
         return;
       }
       if (password.toLowerCase() === "password") { // fun little Easter egg
         alert(`Really? "${password}"?`);
+        setLoading(false);
         return;
       }
       if ([ // another fun Easter egg

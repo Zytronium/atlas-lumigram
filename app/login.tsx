@@ -22,6 +22,7 @@ export default function Page() {
 
       if (!emailPattern.test(email)) {
         alert('Please enter a valid email address.');
+        setLoading(false);
         return;
       }
 
