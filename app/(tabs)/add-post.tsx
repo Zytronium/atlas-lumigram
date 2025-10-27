@@ -5,13 +5,34 @@ import { ImagePreview } from "@/components/ImagePreview";
 import { useImagePicker } from "@/hooks/useImagePicker";
 import { Loading } from "@/components/Loading";
 import { Button } from "@/components/Button";
-import { useRouter } from "expo-router";
+import storage from "@/lib/storage";
+import firestore from "@/lib/firestore";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Page() {
+  const auth = useAuth();
   const [caption, setCaption] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const { image, openImagePicker, reset } = useImagePicker();
-  const router = useRouter();
+
+  async function save() {
+    if (!image) return;
+    setLoading(true);
+    const name = image?.split("/").pop() as string;
+    const { downloadURL, metadata } = await storage.upload(image, name);
+    console.log(downloadURL);
+
+    await firestore.addPost({
+      caption,
+      image: downloadURL,
+      updatedAt: new Date(),
+      createdAt: new Date(),
+      createdBy: auth.user?.uid!!,
+    });
+
+    setLoading(false);
+    alert("Post added!");
+  }
 
   return (
     <View style={styles.container}>
@@ -28,7 +49,7 @@ export default function Page() {
         {image && (
           <View style={styles.actionContainer}>
               <CaptionInput caption={caption} setCaption={setCaption} />
-            <Button theme="primary" label="Save" onPress={reset} />
+            <Button theme="primary" label="Save" onPress={save} />
             <Pressable onPress={reset}>
               <Text style={styles.resetText}>Reset</Text>
             </Pressable>
