@@ -5,21 +5,35 @@ import { CreateNewAccountLink, SignInButton } from "@/components/Buttons"
 import { styles } from "@/constants/Styles";
 import { Logo } from "@/components/Images";
 import { EmailInput, PasswordInput } from "@/components/Inputs";
+import { useAuth } from "@/components/AuthProvider";
+import { router, useRouter } from "expo-router";
 
 export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
+  const auth = useAuth();
+  const router = useRouter();
 
-  function login() {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  async function login() {
+    setLoading(true);
+    try {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailPattern.test(email)) {
-      alert('Please enter a valid email address.');
-      return;
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      await auth.login(email, password);
+      // @ts-ignore
+      router.replace('/(tabs)/');
+
+    } catch (e) {
+      console.error('Error logging in:', e);
+      alert('Error logging in. Please try again.');
     }
-
-    alert(`Logging in with ${email} and ${password}`);
+    setLoading(false);
   }
 
   return (

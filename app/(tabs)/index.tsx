@@ -5,6 +5,7 @@ import { useState } from "react";
 import { homeFeed } from "@/placeholder";
 import Animated from "react-native-reanimated";
 import { runOnJS } from "react-native-reanimated";
+import { useAuth } from "@/components/AuthProvider";
 
 interface Post {
   image: string;
@@ -59,6 +60,7 @@ function PostItem({ imageUrl, caption }: PostItemProps) {
 }
 
 export default function HomeScreen() {
+  const auth = useAuth();
   return (
     <View style={styles.container}>
       <FlashList
