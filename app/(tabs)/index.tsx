@@ -64,7 +64,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <FlashList
-        data={homeFeed}
+        data={posts}
         renderItem={({ item }: { item: Post }) => (
           <PostItem imageUrl={item.image} caption={item.caption} />
         )}
