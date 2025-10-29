@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Alert, Text } from "react-native";
+import { View, StyleSheet, Image, Alert, Text, RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
@@ -65,6 +65,7 @@ export default function HomeScreen() {
   const [homeFeed, setHomeFeed] = useState<Post[]>([]);
   const [lastDoc, setLastDoc] = useState<DocumentSnapshot | undefined>();
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
   const loadPosts = async (lastDocument?: DocumentSnapshot) => {
@@ -84,6 +85,21 @@ export default function HomeScreen() {
       console.error("Error loading posts:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+
+    try {
+      const result = await getPosts(5);
+      setHomeFeed(result.posts);
+      setLastDoc(result.lastDoc);
+    setHasMore(true);
+    } catch (error) {
+      console.error("Error refreshing posts:", error);
+    } finally {
+      setRefreshing(false);
     }
   };
 
@@ -109,6 +125,9 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </View>
   );
