@@ -1,8 +1,8 @@
 import { View, StyleSheet, Image, Alert, Text } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { useState } from "react";
-import { homeFeed } from "@/placeholder";
+import { useState, useEffect } from "react";
+import { getPosts } from "@/lib/firestore";
 import Animated from "react-native-reanimated";
 import { runOnJS } from "react-native-reanimated";
 import { useAuth } from "@/components/AuthProvider";
@@ -61,10 +61,18 @@ function PostItem({ imageUrl, caption }: PostItemProps) {
 
 export default function HomeScreen() {
   const auth = useAuth();
+  const [homeFeed, setHomeFeed] = useState<Post[]>([]);
+
+  useEffect(() => {
+    getPosts(10).then(result => {
+      setHomeFeed(result.posts);
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlashList
-        data={posts}
+        data={homeFeed}
         renderItem={({ item }: { item: Post }) => (
           <PostItem imageUrl={item.image} caption={item.caption} />
         )}
