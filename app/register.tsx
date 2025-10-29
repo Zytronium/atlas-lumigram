@@ -7,6 +7,8 @@ import { Logo } from "@/components/Images";
 import { EmailInput, PasswordInput } from "@/components/Inputs";
 import { useAuth } from "@/components/AuthProvider";
 import { useRouter } from "expo-router";
+import { db } from "@/firebaseConfig";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Page() {
   const [email, setEmail] = useState("");
@@ -18,6 +20,7 @@ export default function Page() {
   async function register() {
     setLoading(true);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     try {
       if (!emailPattern.test(email)) {
         alert('Please enter a valid email address.');
@@ -42,7 +45,20 @@ export default function Page() {
         alert('Never Gonna Give You Up!');
       }
 
-      await auth.register(email, password);
+      // Create Firebase Auth account
+      const userCredential = await auth.register(email, password);
+      const user = userCredential?.user;
+
+      // Create Firestore user document
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, {
+          createdAt: serverTimestamp(),
+          favorites: [],
+        });
+      }
+
+      // Redirect to home tabs
       // @ts-ignore
       router.replace('/(tabs)/');
 

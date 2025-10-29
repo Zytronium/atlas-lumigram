@@ -31,21 +31,21 @@ Completed: Wednesday, October 22, 2025
 - [X] ​2. Add Post (25/25 pts)
 - [X] ​3. Home Feed (25/25 pts)
 - [X] ​4. Gestures (10/10 pts)
-- [ ] ​5. Favorites Feed (14/15 pts)
+- [X] ​5. Favorites Feed (15/15 pts)
 
 
 - [ ] ​6. Optional: User Profile(0/0 pts)
 - [ ] ​7. Optional: User Search(0/0 pts)
 
 
-- [ ] **Everything Done ✓** (99/100 pts) - 99%
+- [X] **Everything Done ✓** (100/100 pts) - 100%
 
 >### Progress Goals:
 ><strong>Saturday/Sunday: 10-25% (task 1)</strong>  
 <strong>Monday: 50% ✓(task 2)</strong>  
 <strong>Tuesday: 85% ✓(task 4)</strong>  
-<strong>Wednesday: 100% (task 5)</strong>
+<strong>Wednesday: 100% ✓(task 5)</strong>
 
-Completed: `N/A`
+Completed: Wednesday, October 29, 2025
 
 ---
