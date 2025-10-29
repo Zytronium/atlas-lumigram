@@ -4,7 +4,12 @@ import {
   getDocs,
   limit,
   orderBy,
-  query, startAfter
+  query, startAfter,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+  setDoc
 } from "@firebase/firestore";
 import { db } from "@/firebaseConfig";
 
@@ -40,4 +45,21 @@ async function addPost(post: Post) {
   await addDoc(posts, post);
 }
 
-export { addPost, getPosts };
+async function addToFavorites(userId: string, postId: string) {
+  const userRef = doc(db, "users", userId);
+  const userDoc = await getDoc(userRef);
+
+  if (!userDoc.exists()) {
+    // Create user document if it doesn't exist
+    await setDoc(userRef, {
+      favorites: [postId]
+    });
+  } else {
+    // Update existing document
+  await updateDoc(userRef, {
+    favorites: arrayUnion(postId)
+  });
+}
+}
+
+export { addPost, getPosts, addToFavorites };

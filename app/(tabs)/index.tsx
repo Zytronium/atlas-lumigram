@@ -2,7 +2,7 @@ import { View, StyleSheet, Image, Alert, Text, RefreshControl } from "react-nati
 import { FlashList } from "@shopify/flash-list";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
-import { getPosts } from "@/lib/firestore";
+import { getPosts, addToFavorites } from "@/lib/firestore";
 import Animated from "react-native-reanimated";
 import { runOnJS } from "react-native-reanimated";
 import { useAuth } from "@/components/AuthProvider";
@@ -18,13 +18,20 @@ interface Post {
 interface PostItemProps {
   imageUrl: string;
   caption: string;
+  postId: string;
+  userId: string;
 }
 
-function PostItem({ imageUrl, caption }: PostItemProps) {
+function PostItem({ imageUrl, caption, postId, userId }: PostItemProps) {
   const [showCaption, setShowCaption] = useState(false);
 
-  const showAlert = () => {
-    Alert.alert("Double Tap", "Image favorited!");
+  const handleFavorite = async () => {
+    try {
+      await addToFavorites(userId, postId);
+      Alert.alert("Success", "Image favorited");
+    } catch (error) {
+      Alert.alert("Error", "Failed to add to favorites");
+    }
   };
 
   const longPress = Gesture.LongPress()
@@ -39,7 +46,7 @@ function PostItem({ imageUrl, caption }: PostItemProps) {
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)
     .onEnd(() => {
-      runOnJS(showAlert)();
+      runOnJS(handleFavorite)();
     });
 
   const composed = Gesture.Exclusive(doubleTap, longPress);
@@ -118,7 +125,12 @@ export default function HomeScreen() {
       <FlashList
         data={homeFeed}
         renderItem={({ item }: { item: Post }) => (
-          <PostItem imageUrl={item.image} caption={item.caption} />
+          <PostItem
+            imageUrl={item.image}
+            caption={item.caption}
+            postId={item.id}
+            userId={auth.user?.uid!!}
+          />
         )}
         // @ts-ignore
         estimatedItemSize={400}
