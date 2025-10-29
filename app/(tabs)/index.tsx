@@ -6,6 +6,7 @@ import { getPosts } from "@/lib/firestore";
 import Animated from "react-native-reanimated";
 import { runOnJS } from "react-native-reanimated";
 import { useAuth } from "@/components/AuthProvider";
+import { DocumentSnapshot } from "@firebase/firestore";
 
 interface Post {
   image: string;
@@ -62,12 +63,39 @@ function PostItem({ imageUrl, caption }: PostItemProps) {
 export default function HomeScreen() {
   const auth = useAuth();
   const [homeFeed, setHomeFeed] = useState<Post[]>([]);
+  const [lastDoc, setLastDoc] = useState<DocumentSnapshot | undefined>();
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  const loadPosts = async (lastDocument?: DocumentSnapshot) => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
+    try {
+      const result = await getPosts(5, lastDocument);
+
+      if (result.posts.length === 0) {
+        setHasMore(false);
+      } else {
+        setHomeFeed(prev => [...prev, ...result.posts]);
+        setLastDoc(result.lastDoc);
+      }
+    } catch (error) {
+      console.error("Error loading posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    getPosts(10).then(result => {
-      setHomeFeed(result.posts);
-    });
+    loadPosts();
   }, []);
+
+  const handleEndReached = () => {
+    if (hasMore && !loading) {
+      loadPosts(lastDoc);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -79,6 +107,8 @@ export default function HomeScreen() {
         // @ts-ignore
         estimatedItemSize={400}
         keyExtractor={(item) => item.id}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );

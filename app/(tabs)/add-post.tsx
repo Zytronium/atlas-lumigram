@@ -6,7 +6,7 @@ import { useImagePicker } from "@/hooks/useImagePicker";
 import { Loading } from "@/components/Loading";
 import { Button } from "@/components/Button";
 import storage from "@/lib/storage";
-import firestore from "@/lib/firestore";
+import { addPost } from "@/lib/firestore";
 import { useAuth } from "@/components/AuthProvider";
 
 export default function Page() {
@@ -22,7 +22,7 @@ export default function Page() {
     const { downloadURL, metadata } = await storage.upload(image, name);
     console.log(downloadURL);
 
-    await firestore.addPost({
+    await addPost({
       caption,
       image: downloadURL,
       updatedAt: new Date(),
